@@ -5,7 +5,9 @@ A super simple FastAPI application that allows students to view and sign up for 
 ## Features
 
 - View all available extracurricular activities
-- Sign up for activities
+- Create a student account and log in
+- Sign up for activities as the authenticated student
+- Unregister yourself from activities
 
 ## Getting Started
 
@@ -29,8 +31,14 @@ A super simple FastAPI application that allows students to view and sign up for 
 
 | Method | Endpoint                                                          | Description                                                         |
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
+| POST   | `/auth/register`                                                   | Create a student account                                             |
+| POST   | `/auth/login`                                                      | Log in and receive an expiring bearer token                          |
+| POST   | `/auth/logout`                                                     | Revoke the current bearer token                                      |
 | GET    | `/activities`                                                     | Get all activities with their details and current participant count |
-| POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+| POST   | `/activities/{activity_name}/signup`                              | Sign up the authenticated student for an activity                    |
+| DELETE | `/activities/{activity_name}/unregister`                          | Unregister the authenticated student from an activity                |
+
+Signup and unregister require an `Authorization: Bearer <token>` header.
 
 ## Data Model
 
@@ -47,4 +55,4 @@ The application uses a simple data model with meaningful identifiers:
    - Name
    - Grade level
 
-All data is stored in memory, which means data will be reset when the server restarts.
+Users, sessions, activities, and registrations are stored in memory, which means data will be reset when the server restarts. Passwords are stored as salted PBKDF2 hashes, and session tokens expire after eight hours or when the user logs out.

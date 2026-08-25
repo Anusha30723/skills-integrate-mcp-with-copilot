@@ -13,6 +13,26 @@
     </header>
 
     <main>
+      <section id="auth-container">
+        <h3>Student Account</h3>
+        <form id="auth-form">
+          <div class="form-group">
+            <label for="auth-email">Email:</label>
+            <input type="email" id="auth-email" required placeholder="your-email@mergington.edu" />
+          </div>
+          <div class="form-group">
+            <label for="auth-password">Password:</label>
+            <input type="password" id="auth-password" required minlength="8" />
+          </div>
+          <div class="auth-actions">
+            <button type="submit" data-action="login">Log In</button>
+            <button type="button" id="register-btn" class="secondary-btn">Create Account</button>
+            <button type="button" id="logout-btn" class="secondary-btn hidden">Log Out</button>
+          </div>
+        </form>
+        <p id="auth-status" class="hidden"></p>
+      </section>
+
       <section id="activities-container">
         <h3>Available Activities</h3>
         <div id="activities-list">
